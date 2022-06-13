@@ -2,10 +2,8 @@ const express = require('express')
 const port = 3000
 const app = express()
 
-app.get('/', (req, res) => {
-  res.send('Hello world')
-})
-
+app.use(express.urlencoded({extended:false}))
+app.use(express.json())
 const checklogin = (req, res, next) => {
   if (req.get('X-Login-Token') != '1234') {
     return next(new Error('Not logged in'))
@@ -13,16 +11,35 @@ const checklogin = (req, res, next) => {
     return next()
 }
 
+app.get('/', (req, res) => {
+  res.send('Hello world')
+})
+
+app.get('/users/create',(req,res)=>{
+  res.send(`<form action="/users" method="post">
+  <input type="text" name="name" placeholder='name'>
+  <input type="number" name="age" placeholder='age'>
+  <input type="submit" value="submit">
+</form>`)
+})
+
 const user = [
   { name: 'jordi', age: 18 },
   { name: 'bucky', age: 30 },
   { name: 'steve', age: 30 },
   { name: 'tony', age: 35 }
 ]
-app.get('/test',checklogin,(req,res)=>{
-  res.end()
+
+app.post('/users',(req,res)=>{
+  user.push(req.body)
+  return res.redirect(`/users/${user.length}`)
 })
-app.get('/users/:id', checklogin,(req, res) => {
+
+app.get('/users',(req,res)=>{
+  return res.send(user)
+})
+
+app.get('/users/:id',(req, res) => {
   const users = user[req.params.id - 1]
   if (Number.isNaN(+req.params.id)) {
     return res.status(400).send('Id is not Number')
@@ -38,6 +55,30 @@ app.get('/users/:id', checklogin,(req, res) => {
   } else {
     return res.send(req.query.field ? users[req.query.field] : users)
   }
+})
+
+app.get('/test-login',(req,res,next)=>{
+  const token = req.get("X-Login-Token")
+  if(!token) {
+    const err = new Error('Token not Found')
+    err.status=401
+    return next(err)
+  }
+  if(token != '1234'){
+    const err = new Error('Token mismatch')
+    err.status=403
+    return next(err)
+  }
+  next()
+},(req,res)=>{
+  res.end()
+})
+
+app.use((err,req,res,next)=>{
+  if (res.headersSent) {
+    return next(err)
+  }
+  res.status(err.status ?? 500).send({error: err.message})
 })
 
 app.listen(port, () => {
