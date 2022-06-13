@@ -48,7 +48,7 @@ app.get('/users/:id',(req, res) => {
     return res.status(400).send('id is nagetive')
   }
   if (!users) {
-    return res.status(404).send({ error: 'Not found' })
+    return res.status(404).send({ error: 'User Not found' })
   }
   if (req.query.type == 'text') {
     return res.send(`${users.name} ${users.age}`)
@@ -72,6 +72,10 @@ app.get('/test-login',(req,res,next)=>{
   next()
 },(req,res)=>{
   res.end()
+})
+
+app.use((req,res)=>{
+  res.status(404).send({error:'Not Found'})
 })
 
 app.use((err,req,res,next)=>{
