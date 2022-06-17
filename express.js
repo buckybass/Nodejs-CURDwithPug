@@ -11,14 +11,14 @@ app.use('/',index)
 app.use('/users',users)
 
 app.use((req,res)=>{
-  res.status(404).send({error:'Not Found'})
+  res.status(404).send('<h1>404 Not Found</h1>')
 })
 
 app.use((err,req,res,next)=>{
   if (res.headersSent) {
     return next(err)
   }
-  res.status(err.status ?? 500).send({error: err.message})
+  res.status(err.status ?? 500).send(`<h1>${err.message ?? 'มีข้อผิดพลาดเกิดขึ้น'}</h1>`)
 })
 
 app.listen(port, () => {
