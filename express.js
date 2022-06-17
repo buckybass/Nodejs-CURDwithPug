@@ -1,11 +1,13 @@
 const express = require('express')
 const users = require('./routes/user')
 const index = require('./routes/index')
+const morgan = require('morgan')
 
 const port = 3000
 const app = express()
 
 app.use(express.urlencoded({extended:false}))
+app.use((morgan('combined')))
 
 app.use('/',index)
 app.use('/users',users)
