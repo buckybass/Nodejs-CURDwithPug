@@ -1,5 +1,4 @@
 const express = require('express')
-const getUserAsTr = require('../utils/getUserAsTr')
 const router = express.Router()
 const pug = require('pug')
 

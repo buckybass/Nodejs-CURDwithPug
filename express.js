@@ -4,7 +4,6 @@ const users = require('./routes/user')
 const index = require('./routes/index')
 const morgan = require('morgan')
 
-const port = 3000
 const app = express()
 
 app.set('x-powered-by',false)
@@ -29,6 +28,10 @@ app.use((err,req,res,next)=>{
   res.status(err.status ?? 500).send(`<h1>${err.message ?? 'มีข้อผิดพลาดเกิดขึ้น'}</h1>`)
 })
 
+let port = process.env.PORT;
+if(port == null || port == ""){
+  port = 3000
+}
 app.listen(port, () => {
   console.log(`App start is port = ${port}`)
 })
