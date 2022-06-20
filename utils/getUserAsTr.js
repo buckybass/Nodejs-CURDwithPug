@@ -6,8 +6,8 @@ module.exports = (users) => {
     html += `<tr>
   <td>${user.name}</td>
   <td>${user.age}</td>
-  <td><a href="/users/${index}">ดูข้อมูล</a><td>
-  <td><a href="/users/${index}/edit">แก้ไข</a><td>
+  <td><a href="/users/${index}">ดูข้อมูล
+  <a href="/users/${index}/edit">แก้ไข</a></a><td>
   </tr>`
   }
   return html

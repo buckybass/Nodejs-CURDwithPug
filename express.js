@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const users = require('./routes/user')
 const index = require('./routes/index')
 const morgan = require('morgan')
@@ -6,8 +7,13 @@ const morgan = require('morgan')
 const port = 3000
 const app = express()
 
+app.set('x-powered-by',false)
+app.set('view engine','pug') //res.rend <= pug
+app.set('views', path.join(__dirname,'./views'))
+
+app.use(express.static(path.join(__dirname,'./public')))
 app.use(express.urlencoded({extended:false}))
-app.use((morgan('combined')))
+// app.use((morgan('combined')))
 
 app.use('/',index)
 app.use('/users',users)

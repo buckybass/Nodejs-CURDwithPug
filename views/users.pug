@@ -1,0 +1,26 @@
+extends layout/default
+
+block content
+  .d-flex
+    h1.me-auto ผู้ใช้งานทั้งหมด
+    div
+      a.btn.btn-primary(href="/users/new") เพิ่มผู้ใช้งาน
+  if users.length == 0
+    p.text-secondary.text-center ไม่พบข้อมูลผู้ใช้งาน
+  else
+    table.table
+      thead
+        tr
+        th ชื่อ
+        th อายุ
+        th จัดการข้อมูล
+      tbody
+        each user , i in users
+          tr
+            td= user.name
+            td= user.age
+            td
+              a.btn.btn-sm.btn-primary.me-1(href=`/users/${i+1}`) ดูข้อมูล
+              a.btn.btn-sm.btn-success.me-1(href=`/users/${i+1}/edit`) แก้ไข
+              a.btn.btn-sm.btn-danger(href=`/users/${i+1}/delete`) ลบ
+
