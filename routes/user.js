@@ -1,10 +1,9 @@
 const express = require('express')
 const multer = require('multer')
-const path = require('path')
 const bytes = require('bytes')
-const uploadAvatar = require('../utils/uploadAvatar')
+const path = require('path')
 const router = express.Router()
-
+const users = require('../models/users')
 
 const upload = multer({
   dest : path.join(__dirname,'../public/uploads'),
@@ -13,14 +12,7 @@ const upload = multer({
   }
 })
 
-const users = [
-  { name: 'jordi', age: 18 },
-  { name: 'bucky', age: 30 },
-  { name: 'steve', age: 30 },
-  { name: 'tony', age: 35 }
-]
-
-router.param('id', (req, res, next, id) => {
+router.param('id',(req, res, next, id) => {
   res.locals.user = users[id - 1] //global scope
   if (!res.locals.user) {
     const err = new Error('User Not Found')
@@ -29,37 +21,12 @@ router.param('id', (req, res, next, id) => {
   }
   return next()
 })
-//Index
-router.get('/', (req, res) => {
-  res.render('users',{users:users})
-})
-//New
-router.get('/new', (req, res) => {
-  res.render('users-create')
-})
-//Ceate
-router.post('/', upload.single('avatar') ,async (req, res) => {
-  await uploadAvatar(req,users.length)
-  users.push(req.body)
-  res.redirect('/users')
-})
-//Show
-router.get('/:id', (req, res) => {
-  res.render('users-show',{user:res.locals.user,id:req.params.id})
-})
-//Edit
-router.get('/:id/edit',(req, res) => {
-  res.render('users-create',{id:req.params.id,user:res.locals.user})
-})
-//Update
-router.post('/:id/edit', upload.single('avatar') , async(req, res) => {
-  users[req.params.id - 1] = req.body
-  await uploadAvatar(req,req.params.id)
-  res.redirect('/users')
-})
-//Delete
-router.get('/:id/delete', (req, res) => {
-  users.splice(req.params.id - 1,1)
-  res.redirect('/users')
-})
+
+router.get('/',require('../controller/users/index'))
+router.get('/new', require('../controller/users/new'))
+router.post('/', upload.single('avatar') ,require('../controller/users/create'))
+router.get('/:id',require('../controller/users/show'))
+router.get('/:id/edit',require('../controller/users/edit'))
+router.post('/:id/edit', upload.single('avatar') ,require('../controller/users/update'))
+router.get('/:id/delete',require('../controller/users/delete'))
 module.exports = router
