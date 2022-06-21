@@ -1,11 +1,13 @@
 extends layout/default
 
 block content
-  h1 #{user ? 'แก้ไขข้อมูลผู้ใช้งาน' : 'เพิ่มข้อมูลผู้ใช้งาน'}
-  form(action=`${user ? `/users/${id}/edit` : '/users'}`, method="post")
+  h1 #{user ? `แก้ไขข้อมูลผู้ใช้งาน (ID:${id})` : 'เพิ่มข้อมูลผู้ใช้งาน'}
+  form(action=`${user ? `/users/${id}/edit` : '/users'}`, method="post" enctype="multipart/form-data")
     label.form-label(for="name") ชื่อ
     input.form-control(id="name" type="text" name="name" value=user ? user.name : '' required)
     label.form-label(for="age") อายุ
     input.form-control(id="age" type="text" name="age" value=user ? user.age : '' required)
-    input.btn.btn-primary.mt-1(type="submit", value=user ? 'แก้ไข' : 'เพิ่มข้อมูล')
+    label.form-label(for="avatar") รูปภาพ
+    input.form-control(id="avatar" type="file" name="avatar" value=user ? user.age : '' required)
+    input.btn.btn-primary.mt-2(type="submit", value=user ? 'แก้ไข' : 'เพิ่มข้อมูล')
 

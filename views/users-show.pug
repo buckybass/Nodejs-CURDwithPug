@@ -2,6 +2,7 @@ extends layout/default
 
 block content
   h1 แสดงข้อมูลผู้ใช้งาน
-    ul
-      li #[b ชื่อ:] #{user.name}
-      li #[b อายุ:] #{user.age}
+  img(src=`/uploads/${id}.jpg`)
+  ul
+    li #[b ชื่อ:] #{user.name}
+    li #[b อายุ:] #{user.age}
