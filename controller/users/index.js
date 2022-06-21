@@ -1,5 +1,6 @@
 const users = require('../../models/users')
 
-module.exports =  (req, res) => {
-  res.render('users',{users:users})
+module.exports =  async (req, res) => {
+  const userData = await users.getAll()
+  res.render('users',{users:userData})
 }

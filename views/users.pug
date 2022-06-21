@@ -15,12 +15,12 @@ block content
         th อายุ
         th จัดการข้อมูล
       tbody
-        each user , i in users
+        each user in users
           tr
             td= user.name
             td= user.age
             td
-              a.btn.btn-sm.btn-primary.me-1(href=`/users/${i+1}`) ดูข้อมูล
-              a.btn.btn-sm.btn-success.me-1(href=`/users/${i+1}/edit`) แก้ไข
+              a.btn.btn-sm.btn-primary.me-1(href=`/users/${user._id}`) ดูข้อมูล
+              a.btn.btn-sm.btn-success.me-1(href=`/users/${user._id}/edit`) แก้ไข
               a.btn.btn-sm.btn-danger(href=`/users/${i+1}/delete`) ลบ
 

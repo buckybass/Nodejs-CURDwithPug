@@ -1,6 +1,16 @@
-module.exports=[
-  { name: 'jordi', age: 18 },
-  { name: 'bucky', age: 30 },
-  { name: 'steve', age: 30 },
-  { name: 'tony', age: 35 }
-]
+const client = require("../mongoDB/client")
+const db = client.db('manager')
+const col = db.collection('users')
+
+module.exports = {
+  getById(id) {
+    return col.findOne({_id:new Object(id)})
+  },
+  getAll() {
+    return col.find().toArray()
+  },
+  create(user) {
+    return col.insertOne(user)
+  }
+}
+
