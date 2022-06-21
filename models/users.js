@@ -4,7 +4,7 @@ const col = db.collection('users')
 
 module.exports = {
   getById(id) {
-    return col.findOne({_id:new Object(id)})
+    return col.findOne({_id:new ObjectId(id)})
   },
   getAll() {
     return col.find().toArray()
