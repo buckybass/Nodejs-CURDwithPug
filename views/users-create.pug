@@ -8,6 +8,6 @@ block content
     label.form-label(for="age") อายุ
     input.form-control(id="age" type="text" name="age" value=user ? user.age : '' required)
     label.form-label(for="avatar") รูปภาพ
-    input.form-control(id="avatar" type="file" name="avatar" value=user ? user.age : '' required)
+    input.form-control(id="avatar" type="file" name="avatar" value=user ? user.age : '')
     input.btn.btn-primary.mt-2(type="submit", value=user ? 'แก้ไข' : 'เพิ่มข้อมูล')
 
