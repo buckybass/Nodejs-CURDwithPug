@@ -12,16 +12,7 @@ const upload = multer({
   }
 })
 
-router.param('id',(req, res, next, id) => {
-  res.locals.user = users[id - 1] //global scope
-  if (!res.locals.user) {
-    const err = new Error('User Not Found')
-    err.status = 404
-    return next(err)
-  }
-  return next()
-})
-
+router.param('id',require('../controller/users/paramId'))
 router.get('/',require('../controller/users/index'))
 router.get('/new', require('../controller/users/new'))
 router.post('/', upload.single('avatar') ,require('../controller/users/create'))
