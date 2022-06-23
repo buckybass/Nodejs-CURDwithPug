@@ -6,3 +6,7 @@ block content
   ul
     li #[b ชื่อ:] #{user.name}
     li #[b อายุ:] #{user.age}
+  h3 เวลาเข้างาน
+  ul
+    each record in user.records
+      li #{record.recordedAt} #[b Note: ]#{record.note}

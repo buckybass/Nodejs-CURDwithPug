@@ -20,7 +20,12 @@ block content
             td= user.name
             td= user.age
             td
-              a.btn.btn-sm.btn-primary.me-1(href=`/users/${user._id}`) ดูข้อมูล
-              a.btn.btn-sm.btn-success.me-1(href=`/users/${user._id}/edit`) แก้ไข
-              a.btn.btn-sm.btn-danger(href=`/users/${user._id}/delete` onclick='confirm("ลบจริงไหม")') ลบ
+              .d-flex.align-items-center
+                a.btn.btn-sm.btn-primary.me-1(href=`/users/${user._id}`) ดูข้อมูล
+                a.btn.btn-sm.btn-success.me-1(href=`/users/${user._id}/edit`) แก้ไข
+                a.btn.btn-sm.btn-danger.me-1(href=`/users/${user._id}/delete` onclick='confirm("ลบจริงไหม")') ลบ
+                form(action=`/users/${user._id}/record` method='post')
+                  .input-group
+                    input.form-control(type="text" name="note" placeholder="หมายเหตุ")
+                    button.btn.btn-secondary บันทึก
 
