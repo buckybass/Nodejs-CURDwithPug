@@ -6,9 +6,9 @@ block content
     label.form-label(for="name") ชื่อ
     input.form-control(id="name" type="text" name="name" value=user ? user.name : '' required)
     label.form-label(for="age") อายุ
-    input.form-control(id="age" type="text" name="age" value=user ? user.age : '' required)
+    input.form-control(id="age" type="number" name="age" value=user ? user.age : '' required)
     label.form-label(for="avatar") รูปภาพ
-    img.rounded.m-3(src=(user.avatar) ? user.avatar : 'https://via.placeholder.com/200', alt="")
+    img.rounded.m-3(src=(user) ? user.avatar : 'https://via.placeholder.com/200', alt="")
     input.form-control(id="avatar" type="file" name="avatar" accept="image/png, image/jpeg , image/jpg")
     input.btn.btn-primary.mt-2(type="submit", value=user ? 'แก้ไข' : 'เพิ่มข้อมูล')
 
