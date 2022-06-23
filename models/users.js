@@ -1,16 +1,9 @@
-const client = require("../mongoDB/client")
-const db = client.db('manager')
-const col = db.collection('users')
+const mongoose = require('mongoose')
 
-module.exports = {
-  getById(id) {
-    return col.findOne({_id:new ObjectId(id)})
-  },
-  getAll() {
-    return col.find().toArray()
-  },
-  create(user) {
-    return col.insertOne(user)
-  }
-}
+const schema = new mongoose.Schema({
+    name:String,
+    age:Number,
+    avatar:String
+})
 
+module.exports=mongoose.model('Users',schema)

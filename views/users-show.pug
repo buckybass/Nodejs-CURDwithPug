@@ -2,7 +2,7 @@ extends layout/default
 
 block content
   h1 แสดงข้อมูลผู้ใช้งาน
-  img(src=`/uploads/${id}.jpg`)
+  img(src=(user.avatar) ? user.avatar : 'https://via.placeholder.com/200')
   ul
     li #[b ชื่อ:] #{user.name}
     li #[b อายุ:] #{user.age}

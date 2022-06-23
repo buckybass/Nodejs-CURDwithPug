@@ -22,5 +22,5 @@ block content
             td
               a.btn.btn-sm.btn-primary.me-1(href=`/users/${user._id}`) ดูข้อมูล
               a.btn.btn-sm.btn-success.me-1(href=`/users/${user._id}/edit`) แก้ไข
-              a.btn.btn-sm.btn-danger(href=`/users/${i+1}/delete`) ลบ
+              a.btn.btn-sm.btn-danger(href=`/users/${user._id}/delete` onclick='confirm("ลบจริงไหม")') ลบ
 

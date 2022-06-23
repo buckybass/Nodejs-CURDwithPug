@@ -1,10 +1,11 @@
 const users = require("../../models/users")
 const uploadAvatar = require("../../utils/uploadAvatar")
 module.exports=async (req, res) => {
-  await uploadAvatar(req,users.length)
-  await users.create({
-    name:req.body.name,
-    age:req.body.age
-  })
+  const doc = await users.create(req.body)
+  const avatar = await uploadAvatar(req,doc._id)
+  if (avatar) {
+    doc.avatar = avatar
+    await doc.save()
+  }
   res.redirect('/users')
 }

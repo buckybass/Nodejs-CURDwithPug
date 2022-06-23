@@ -1,12 +1,12 @@
 const express = require('express')
+const mongoose = require('mongoose')
 const path = require('path')
 const users = require('./routes/user')
 const index = require('./routes/index')
 const morgan = require('morgan')
-const client = require('./mongoDB/client')
 
 async function startServer(){
-  await client.connect()
+  await mongoose.connect('mongodb://localhost:27017/manager')
   const app = express()
 
   app.set('x-powered-by',false)
