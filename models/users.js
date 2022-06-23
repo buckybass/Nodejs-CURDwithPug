@@ -15,10 +15,13 @@ const schema = new mongoose.Schema({
     avatar:String
 },{timestamps:true})
 
-schema.virtual(('records'),{
+const refRecords ={
   ref:'Records',
   localField:'_id',
   foreignField:'user'
-})
+}
+schema.virtual(('records'),refRecords)
+
+schema.virtual(('recordCount'),{...refRecords,count:true})
 
 module.exports=mongoose.model('Users',schema)
