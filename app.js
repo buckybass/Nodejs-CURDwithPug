@@ -5,7 +5,7 @@ const users = require('./routes/user')
 const index = require('./routes/index')
 
 async function startServer(){
-  await mongoose.connect('mongodb+srv://Admin:Password@monkey.yasgbdt.mongodb.net/?retryWrites=true&w=majority')
+  await mongoose.connect('mongodb+srv://Admin:Password@monkey.yasgbdt.mongodb.net/?retryWrites=true&w=majority/manager')
   const app = express()
 
   app.set('x-powered-by',false)

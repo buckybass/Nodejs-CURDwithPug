@@ -3,12 +3,11 @@ const multer = require('multer')
 const bytes = require('bytes')
 const path = require('path')
 const router = express.Router()
-const users = require('../models/users')
 
 const upload = multer({
   dest : path.join(__dirname,'../public/uploads'),
   limits:{
-    fileSize:bytes('2mb')
+    fileSize:bytes('10mb')
   }
 })
 
