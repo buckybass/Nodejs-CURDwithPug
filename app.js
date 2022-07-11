@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const path = require('path')
 const users = require('./routes/user')
 const index = require('./routes/index')
-const {uploadfile}= require('./models/uploadtodrive')
 
 async function startServer(){
   const mongourl = `mongodb+srv://Admin:Password@monkey.yasgbdt.mongodb.net/?retryWrites=true&w=majority`
@@ -36,5 +35,4 @@ async function startServer(){
     console.log(`App start is port = ${port}`)
   })
 }
-uploadfile()
 startServer()
