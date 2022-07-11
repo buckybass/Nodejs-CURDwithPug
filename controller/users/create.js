@@ -5,7 +5,7 @@ module.exports=async (req, res) => {
   const avatar = await uploadAvatar(req,doc._id)
   if (avatar) {
     doc.avatar = avatar
-    await doc.save()
+    await doc.save().catch((error)=>{console.log(error)})
   }
   res.redirect('/users')
 }
